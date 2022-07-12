@@ -1,6 +1,7 @@
 import React from "react";
 import shortid from 'shortid';
 
+
 import {ContactList} from 'components/ContactList/ContactList';
 import {ContactForm} from 'components/ContactForm/ContactForm';
 import {Filter} from 'components/Filter/Filter';
@@ -17,7 +18,7 @@ export class App extends React.Component {
   }
   
   addContact = (name, number) => {
-    const {contacts} = this.state;
+    const { contacts } = this.state; 
     const newContact = {
     id: shortid.generate(),
     name,
@@ -51,6 +52,21 @@ contacts: pevState.contacts.filter(contact => contact.id !== contactId)
     );
   };
 
+componentDidMount() {
+  const contacts = localStorage.getItem('contacts');
+  const contactsPars = JSON.parse(contacts);
+  if(contactsPars) {
+    this.setState({contacts: contactsPars});
+  }
+}
+
+
+  componentDidUpdate(prevState) {
+    const { contacts } = this.state;
+    if (contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
 
   render() {
   

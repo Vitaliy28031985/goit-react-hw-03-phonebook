@@ -1,13 +1,15 @@
 import React from "react";
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
 
 
-export class ContactForm extends React.Component {
+export class ContactForm extends React.Component { 
+static propTypes = { onSubmit: PropTypes.func.isRequired };
 state = {
 name: '',
 number: '',
-   }
+   }  
 
 nameInputId = shortid.generate();
 numberInpitId = shortid.generate();
